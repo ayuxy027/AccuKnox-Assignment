@@ -31,10 +31,20 @@ export interface DashboardState {
 }
 
 export interface DashboardActions {
+  initialize: () => void;
   addWidget: (categoryId: string, widget: Widget) => void;
   removeWidget: (widgetId: string) => void;
   updateSearchQuery: (query: string) => void;
   togglePersonalizationPanel: () => void;
   addCustomWidget: (data: NewWidgetData) => void;
   resetDashboard: () => void;
+  batchUpdateWidgets: (updates: Array<{ widgetId: string; updates: Partial<Widget> }>) => void;
+  getWidgetById: (widgetId: string) => Widget | null;
+  getCategoryById: (categoryId: string) => Category | null;
+  getStats: () => {
+    totalCategories: number;
+    totalWidgets: number;
+    removableWidgets: number;
+    storageUsage: { used: number; available: number };
+  };
 }

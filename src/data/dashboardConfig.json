@@ -27,14 +27,6 @@
           "is_removable": true,
           "is_searchable": true,
           "creation_timestamp": "2025-01-20T09:47:00Z"
-        },
-        {
-          "widget_id": "securityTrends",
-          "widget_name": "Security Trends",
-          "widget_content": "Last 30 days: Critical (12) High (45) Medium (89) Low (156)",
-          "is_removable": true,
-          "is_searchable": true,
-          "creation_timestamp": "2025-01-20T09:47:00Z"
         }
       ]
     },
@@ -62,14 +54,6 @@
           "widget_id": "containerSecurity",
           "widget_name": "Container Security Posture",
           "widget_content": "Vulnerable Images: 34 Scanned: 892 Clean: 858",
-          "is_removable": true,
-          "is_searchable": true,
-          "creation_timestamp": "2025-01-20T09:47:00Z"
-        },
-        {
-          "widget_id": "networkSecurity",
-          "widget_name": "Network Security Analysis",
-          "widget_content": "Allowed Connections: 1,234 Blocked: 567 Suspicious: 23",
           "is_removable": true,
           "is_searchable": true,
           "creation_timestamp": "2025-01-20T09:47:00Z"

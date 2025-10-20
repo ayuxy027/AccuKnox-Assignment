@@ -1,8 +1,13 @@
-import React from 'react';
-import { Search, Plus, RotateCcw } from 'lucide-react';
+import React, { memo, useCallback, useMemo } from 'react';
+import { Plus, RotateCcw } from 'lucide-react';
 import { useDashboardStore } from '../store/dashboardStore';
+import { SearchInput } from './SearchInput';
 
-export const DashboardHeader: React.FC = () => {
+interface DashboardHeaderProps {
+    className?: string;
+}
+
+export const DashboardHeader = memo<DashboardHeaderProps>(({ className = '' }) => {
     const {
         searchQuery,
         updateSearchQuery,
@@ -10,54 +15,71 @@ export const DashboardHeader: React.FC = () => {
         resetDashboard
     } = useDashboardStore();
 
+    const handleSearchChange = useCallback((value: string) => {
+        updateSearchQuery(value);
+    }, [updateSearchQuery]);
+
+    const handleResetClick = useCallback(() => {
+        resetDashboard();
+    }, [resetDashboard]);
+
+    const handleAddWidgetClick = useCallback(() => {
+        togglePersonalizationPanel();
+    }, [togglePersonalizationPanel]);
+
+    const brandLogo = useMemo(() => (
+        <div className="brand-logo" aria-label="Dynamic Dashboard Logo">
+            <span className="sr-only">Dynamic Dashboard</span>
+            <span aria-hidden="true">D</span>
+        </div>
+    ), []);
+
     return (
-        <header className="bg-white border-b border-slate-200 sticky top-0 z-50">
+        <header className={`border-b border-neutral-200 sticky top-0 z-50 backdrop-blur-sm bg-white/95 ${className}`}>
             <div className="container py-4">
                 <div className="flex items-center justify-between gap-4">
-                    {/* Logo/Title */}
+                    {/* Enhanced Logo/Title */}
                     <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center">
-                            <span className="text-white font-bold text-sm">D</span>
-                        </div>
-                        <h1 className="text-xl font-semibold text-slate-900">
+                        {brandLogo}
+                        <h1 className="text-xl font-semibold text-neutral-900 text-gradient">
                             Dynamic Dashboard
                         </h1>
                     </div>
 
-                    {/* Search Bar */}
+                    {/* Enhanced Search Bar */}
                     <div className="flex-1 max-w-md">
-                        <div className="relative">
-                            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-slate-400" />
-                            <input
-                                type="text"
-                                placeholder="Q Search anything..."
-                                value={searchQuery}
-                                onChange={(e) => updateSearchQuery(e.target.value)}
-                                className="input pl-10"
-                            />
-                        </div>
+                        <SearchInput
+                            value={searchQuery}
+                            onChange={handleSearchChange}
+                            placeholder="Q Search anything..."
+                            debounceMs={200}
+                        />
                     </div>
 
-                    {/* Action Buttons */}
+                    {/* Enhanced Action Buttons */}
                     <div className="flex items-center gap-2">
                         <button
-                            onClick={resetDashboard}
+                            onClick={handleResetClick}
                             className="btn btn-ghost"
                             title="Reset to default dashboard"
+                            aria-label="Reset dashboard to default state"
                         >
-                            <RotateCcw className="w-4 h-4" />
+                            <RotateCcw className="w-4 h-4" aria-hidden="true" />
                         </button>
 
                         <button
-                            onClick={togglePersonalizationPanel}
+                            onClick={handleAddWidgetClick}
                             className="btn btn-primary"
+                            aria-label="Add new widget to dashboard"
                         >
-                            <Plus className="w-4 h-4 mr-2" />
-                            Add Widget
+                            <Plus className="w-4 h-4" aria-hidden="true" />
+                            <span>Add Widget</span>
                         </button>
                     </div>
                 </div>
             </div>
         </header>
     );
-};
+});
+
+DashboardHeader.displayName = 'DashboardHeader';
