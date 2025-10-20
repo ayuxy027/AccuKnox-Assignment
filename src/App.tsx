@@ -3,7 +3,6 @@ import { DashboardHeader } from './components/DashboardHeader';
 import { CategorySection } from './components/CategorySection';
 import { PersonalizationPanel } from './components/PersonalizationPanel';
 import { ChartWidget } from './components/ChartWidget';
-import { PerformanceMonitor } from './components/PerformanceMonitor';
 
 // Sample chart data for visual elements
 const sampleChartData = [
@@ -46,16 +45,10 @@ function App() {
       <main className="container py-8">
         {/* Enhanced Analytics Overview Section */}
         <section className="mb-12" aria-labelledby="analytics-heading">
-          <div className="flex items-center justify-between mb-6">
+          <div className="mb-6">
             <h2 id="analytics-heading" className="text-2xl font-bold text-neutral-900">
               Analytics Overview
             </h2>
-            <div className="flex items-center gap-3">
-              <div className="status-indicator status-success">
-                Live Data
-              </div>
-              <PerformanceMonitor />
-            </div>
           </div>
           <div className="grid-auto-fit">
             <ChartWidget
@@ -80,7 +73,7 @@ function App() {
 
         {/* Enhanced Dashboard Categories */}
         <section aria-labelledby="categories-heading">
-          <div className="flex items-center justify-between mb-6">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
             <h2 id="categories-heading" className="text-2xl font-bold text-neutral-900">
               Dashboard Categories
             </h2>

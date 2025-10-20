@@ -60,7 +60,7 @@ export const Widget = memo<WidgetProps>(({ widget, onRemove, className = '' }) =
 
     return (
         <div
-            className={`card p-6 group relative gpu-accelerated ${className}`}
+            className={`card p-4 sm:p-6 group relative gpu-accelerated ${className}`}
             role="article"
             aria-labelledby={`${widgetId}-title`}
             aria-describedby={`${widgetId}-content`}
@@ -100,13 +100,13 @@ export const Widget = memo<WidgetProps>(({ widget, onRemove, className = '' }) =
                         <p className="text-sm text-neutral-500 font-medium">No Graph data available!</p>
                     </div>
                 ) : metrics.length > 0 ? (
-                    <div className="grid grid-cols-2 gap-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         {metrics.slice(0, 4).map((metric, index) => (
                             <div
                                 key={index}
                                 className="text-center p-3 rounded-lg bg-gradient-to-br from-neutral-50 to-neutral-100 border border-neutral-200 hover:shadow-sm transition-shadow"
                             >
-                                <div className="text-xl font-bold text-neutral-900 mb-1">
+                                <div className="text-lg sm:text-xl font-bold text-neutral-900 mb-1">
                                     {metric}
                                 </div>
                                 <div className="text-xs text-neutral-600 font-medium capitalize">

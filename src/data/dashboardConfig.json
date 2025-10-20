@@ -7,7 +7,7 @@
         {
           "widget_id": "cloudAccountRiskAssessment",
           "widget_name": "Cloud Account Risk Assessment",
-          "widget_content": "Connected (2) Not Connected (2) 9659 Total Failed (1689) Warning (681) Not available (36) Passed (7253)",
+          "widget_content": "Connected (2) Not Connected (2) Total Failed (1689) Warning (681) Not available (36) Passed (7253)",
           "is_removable": true,
           "is_searchable": true,
           "creation_timestamp": "2025-01-20T09:47:00Z"

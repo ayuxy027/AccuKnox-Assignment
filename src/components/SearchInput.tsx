@@ -1,4 +1,4 @@
-import React, { memo, useState, useCallback, useRef, useEffect } from 'react';
+import { memo, useState, useCallback, useRef, useEffect } from 'react';
 import { Search, X } from 'lucide-react';
 import { useDebounce } from '../hooks/useDebounce';
 

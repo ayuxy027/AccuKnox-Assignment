@@ -1,129 +1,19 @@
-# Dynamic Dashboard System
+# Widgetly - Dynamic Dashboard
 
-A sophisticated, production-ready dynamic dashboard application built with React, TypeScript, and modern state management. This project demonstrates advanced frontend development practices with a focus on user experience, performance, and maintainability.
+## Technical Implementation
 
-## 🚀 Features
-
-### Core Functionality
-- **Dynamic Widget Management**: Add, remove, and customize widgets in real-time
-- **Advanced Search**: Global search across all widgets with instant filtering
-- **Personalization Panel**: Intuitive interface for dashboard customization
-- **Visual Analytics**: Interactive charts and graphs using Recharts
-- **Responsive Design**: Optimized for desktop, tablet, and mobile devices
-
-### Technical Features
-- **Type-Safe JSON Schema**: Strictly enforced configuration structure
-- **State Persistence**: Dashboard state saved across browser sessions
-- **Ambient UI Design**: Professional muted color palette with consistent branding
-- **Performance Optimized**: Efficient rendering with minimal re-renders
-- **Accessibility**: WCAG compliant with proper ARIA labels and keyboard navigation
-
-## 🛠 Technology Stack
-
-- **Frontend Framework**: React 19 with TypeScript
-- **Build Tool**: Vite for fast development and optimized builds
-- **State Management**: Zustand with persistence middleware
-- **Styling**: Custom CSS with CSS variables for theming
-- **Charts**: Recharts for interactive data visualization
-- **Icons**: Lucide React for consistent iconography
-- **Package Manager**: Bun for fast dependency management
-
-## 📋 Prerequisites
-
-Before running this project, ensure you have the following installed:
-
-- [Bun](https://bun.sh/) (latest version)
-- Node.js 18+ (if not using Bun)
-
-## 🚀 Quick Start
-
-### 1. Clone the Repository
-
-```bash
-git clone <repository-url>
-cd dynamic-dashboard
-```
-
-### 2. Install Dependencies
-
-```bash
-bun install
-```
-
-### 3. Start Development Server
-
-```bash
-bun dev
-```
-
-The application will be available at `http://localhost:5173`
-
-### 4. Build for Production
-
-```bash
-bun run build
-```
-
-### 5. Preview Production Build
-
-```bash
-bun run preview
-```
-
-## 📁 Project Structure
-
-```
-src/
-├── components/           # React components
-│   ├── Widget.tsx       # Individual widget component
-│   ├── CategorySection.tsx  # Category container
-│   ├── DashboardHeader.tsx  # Main header with search
-│   ├── PersonalizationPanel.tsx  # Widget management panel
-│   └── ChartWidget.tsx  # Chart visualization component
-├── data/                # Static data and configurations
-│   └── dashboardConfig.json  # Initial dashboard schema
-├── store/               # State management
-│   └── dashboardStore.ts     # Zustand store configuration
-├── styles/              # Styling
-│   └── globals.css      # Global styles and theme
-├── types/               # TypeScript type definitions
-│   └── dashboard.ts     # Dashboard-related types
-├── App.tsx             # Main application component
-└── main.tsx            # Application entry point
-```
-
-## 🎨 Design System
-
-### Color Palette
-The application uses a carefully crafted ambient muted color palette:
-
-- **Primary**: Slate grays for backgrounds and text
-- **Accent**: Blue tones for interactive elements
-- **Status**: Semantic colors for different states (success, warning, error)
-- **Neutral**: Consistent grays for borders and subtle elements
-
-### Typography
-- **Font Family**: System fonts for optimal performance
-- **Font Weights**: 400 (normal), 500 (medium), 600 (semibold), 700 (bold)
-- **Line Height**: 1.6 for optimal readability
-
-## 🔧 Configuration
-
-### JSON Schema Structure
-
-The dashboard configuration follows a strict JSON schema:
-
+### JSON Schema Architecture
 ```json
 {
   "dashboard_configuration": [
     {
-      "category_id": "unique-category-id",
-      "category_name": "Category Display Name",
+      "category_id": "cspmExecutiveDashboard",
+      "category_name": "CSPM Executive Dashboard", 
       "widgets": [
         {
-          "widget_id": "unique-widget-id",
-          "widget_name": "Widget Display Name",
-          "widget_content": "Widget content and data",
+          "widget_id": "cloudAccountRiskAssessment",
+          "widget_name": "Cloud Account Risk Assessment",
+          "widget_content": "Connected (2) Not Connected (2) 9659 Total Failed (1689) Warning (681) Not available (36) Passed (7253)",
           "is_removable": true,
           "is_searchable": true,
           "creation_timestamp": "2025-01-20T09:47:00Z"
@@ -134,110 +24,92 @@ The dashboard configuration follows a strict JSON schema:
 }
 ```
 
-### Environment Variables
+### State Management Strategy
+- **Zustand Store**: Centralized state management for dynamic operations
+- **Debounced Persistence**: 300ms localStorage writes for performance
+- **Atomic Operations**: Batch widget updates with single state mutations
+- **Optimistic Updates**: UI updates immediately, persistence debounced
 
-No environment variables are required for basic functionality. The application uses localStorage for persistence.
+### Dynamic Operations Implementation
 
-## 🧪 Development
+#### Add Widget Flow
+1. User triggers `+ Add Widget` button
+2. `PersonalizationPanel` renders with available widgets
+3. New custom widgets generate UUID v4 `widget_id`
+4. State mutation: `categories[categoryIndex].widgets.push(newWidget)`
+5. Debounced localStorage persistence
 
-### Available Scripts
+#### Remove Widget Flow
+1. User clicks widget `X` icon or unchecks from panel
+2. State mutation: `categories[categoryIndex].widgets.filter(w => w.widget_id !== targetId)`
+3. Immediate UI update, debounced persistence
 
-- `bun dev` - Start development server with hot reload
-- `bun build` - Build production bundle
-- `bun preview` - Preview production build
-- `bun run lint` - Run ESLint for code quality
+#### Search Implementation
+1. Global search bar with 200ms debouncing
+2. Filter logic: `widget.widget_name.toLowerCase().includes(query.toLowerCase())`
+3. Categories with no matching widgets hidden
+4. Real-time filtering without API calls
 
-### Code Quality
+### Performance Optimizations
+- **React.memo**: Component memoization for render optimization
+- **useCallback/useMemo**: Event handler and computation caching
+- **Debounced Search**: 200ms delay prevents excessive filtering
+- **GPU Acceleration**: CSS transforms for smooth animations
+- **Selective Subscriptions**: Zustand store subscriptions optimized
 
-The project follows strict coding standards:
+### Technology Stack
+- **React 18** with TypeScript
+- **Vite** for build tooling
+- **Zustand** for state management
+- **Tailwind CSS v4** for styling
+- **Lucide React** for icons
+- **Recharts** for data visualization
 
-- **TypeScript**: Full type safety with strict mode
-- **ESLint**: Code linting with React-specific rules
-- **Prettier**: Consistent code formatting
-- **Component Architecture**: Modular, reusable components
+### Local Development
 
-## 🚀 Deployment
+```bash
+# Install dependencies
+npm install
 
-### Static Hosting
+# Start development server
+npm run dev
 
-The application builds to static files that can be deployed to any static hosting service:
+# Build for production
+npm run build
 
-- **Vercel**: `vercel --prod`
-- **Netlify**: Drag and drop the `dist` folder
-- **GitHub Pages**: Use GitHub Actions for automated deployment
-- **AWS S3**: Upload the `dist` folder to an S3 bucket
+# Type checking
+npm run type-check
+```
 
-### Environment Considerations
+### Project Structure
+```
+src/
+├── components/          # React components
+├── hooks/              # Custom hooks (useDebounce)
+├── store/              # Zustand store
+├── types/              # TypeScript interfaces
+├── utils/              # Storage utilities
+└── data/               # JSON configuration
+```
 
-- No server-side rendering required
-- Client-side routing with React Router (if needed)
-- Static asset optimization included in build
+### Browser Storage
+- **localStorage**: Persistent widget state across sessions
+- **Version Control**: Data migration and compatibility
+- **Size Limits**: 5MB storage with automatic cleanup
+- **Error Handling**: Graceful fallbacks for storage failures
 
-## 🔍 Features Deep Dive
+### Accessibility Features
+- **ARIA Labels**: Screen reader compatibility
+- **Keyboard Navigation**: Full keyboard accessibility
+- **Focus Management**: Visible focus indicators
+- **Semantic HTML**: Proper element semantics
 
-### Dynamic Widget Operations
+### Production Readiness
+- **TypeScript**: Full type safety
+- **Error Boundaries**: Graceful error handling
+- **Performance Monitoring**: Real-time metrics
+- **Responsive Design**: Mobile-first approach
+- **SEO Optimized**: Semantic markup structure
 
-#### Adding Widgets
-1. Click the "Add Widget" button in the header
-2. Use the personalization panel to select existing widgets or create custom ones
-3. Custom widgets require: name, content, and category selection
-4. Widgets are immediately added to the dashboard
-
-#### Removing Widgets
-1. Hover over any removable widget to see the X button
-2. Click the X button to remove the widget
-3. Use the personalization panel for bulk removal operations
-
-#### Search Functionality
-- Real-time search across all widget names
-- Case-insensitive matching
-- Instant filtering with no loading states
-- Categories without matching widgets are hidden
-
-### State Management
-
-The application uses Zustand for state management with the following features:
-
-- **Persistence**: Dashboard state saved to localStorage
-- **Immutability**: State updates use immutable patterns
-- **Performance**: Selective subscriptions prevent unnecessary re-renders
-- **Type Safety**: Full TypeScript integration
-
-## 🐛 Troubleshooting
-
-### Common Issues
-
-1. **Build Errors**: Ensure all dependencies are installed with `bun install`
-2. **Type Errors**: Check TypeScript configuration and type definitions
-3. **Styling Issues**: Verify CSS variables are properly defined
-4. **State Issues**: Clear localStorage if experiencing state corruption
-
-### Performance Optimization
-
-- Widget rendering is optimized with React.memo where appropriate
-- Search is debounced to prevent excessive filtering
-- Chart components use ResponsiveContainer for optimal rendering
-
-## 📄 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 📞 Support
-
-For support or questions about this project:
-
-- Create an issue in the repository
-- Check the documentation in the `docs/` folder
-- Review the interview questions in `interview.md` for technical insights
-
----
-
-Built with ❤️ using React, TypeScript, and modern web technologies.
+## Interview Questions
+See `interview.md` for comprehensive technical questions covering JSON schema design, state management, UI/UX implementation, and frontend best practices.
