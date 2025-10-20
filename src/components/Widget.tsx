@@ -84,7 +84,7 @@ export const Widget = memo<WidgetProps>(({ widget, onRemove, className = '' }) =
 
     return (
         <div
-            className={`card p-4 sm:p-6 group relative gpu-accelerated ${className}`}
+            className={`bg-white border border-gray-200 rounded-xl shadow-sm transition-all duration-200 p-4 sm:p-6 group relative hover:shadow-lg hover:-translate-y-0.5 ${className}`}
             role="article"
             aria-labelledby={`${widgetId}-title`}
             aria-describedby={`${widgetId}-content`}
@@ -93,7 +93,7 @@ export const Widget = memo<WidgetProps>(({ widget, onRemove, className = '' }) =
             {widget.is_removable && (
                 <button
                     onClick={handleRemove}
-                    className="absolute top-3 right-3 p-1.5 rounded-full hover:bg-red-50 text-neutral-400 hover:text-red-500 transition-all duration-200 opacity-0 group-hover:opacity-100 focus:opacity-100 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+                    className="absolute top-3 right-3 p-1.5 rounded-full hover:bg-red-50 text-gray-400 hover:text-red-500 transition-all duration-200 opacity-0 group-hover:opacity-100 focus:opacity-100 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
                     aria-label={`Remove ${widget.widget_name} widget`}
                     title={`Remove ${widget.widget_name}`}
                 >
@@ -108,7 +108,7 @@ export const Widget = memo<WidgetProps>(({ widget, onRemove, className = '' }) =
                 </div>
                 <h3
                     id={`${widgetId}-title`}
-                    className="font-semibold text-neutral-900 text-lg leading-tight"
+                    className="font-semibold text-gray-900 text-lg leading-tight"
                 >
                     {widget.widget_name}
                 </h3>
@@ -118,39 +118,39 @@ export const Widget = memo<WidgetProps>(({ widget, onRemove, className = '' }) =
             <div id={`${widgetId}-content`} className="space-y-3">
                 {!isDataAvailable ? (
                     <div className="text-center py-8">
-                        <div className="w-16 h-16 mx-auto mb-3 rounded-full bg-neutral-100 flex items-center justify-center">
-                            <TrendingUp className="w-8 h-8 text-neutral-400" aria-hidden="true" />
+                        <div className="w-16 h-16 mx-auto mb-3 rounded-full bg-gray-100 flex items-center justify-center">
+                            <TrendingUp className="w-8 h-8 text-gray-400" aria-hidden="true" />
                         </div>
-                        <p className="text-sm text-neutral-500 font-medium">No Graph data available!</p>
+                        <p className="text-sm text-gray-500 font-medium">No Graph data available!</p>
                     </div>
                 ) : metrics.length > 0 ? (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div className="grid grid-cols-2 gap-3">
                         {metrics.slice(0, 4).map((metric, index) => (
                             <div
                                 key={index}
-                                className="text-center p-3 rounded-lg bg-gradient-to-br from-neutral-50 to-neutral-100 border border-neutral-200 hover:shadow-sm transition-shadow"
+                                className="text-center p-3 rounded-lg bg-gradient-to-br from-gray-50 to-gray-100 border border-gray-200 hover:shadow-sm transition-shadow"
                             >
-                                <div className="text-lg sm:text-xl font-bold text-neutral-900 mb-1">
+                                <div className="text-lg sm:text-xl font-bold text-gray-900 mb-1">
                                     {metric}
                                 </div>
-                                <div className="text-xs text-neutral-600 font-medium capitalize">
+                                <div className="text-xs text-gray-600 font-medium capitalize">
                                     {labels[index] || `Metric ${index + 1}`}
                                 </div>
                             </div>
                         ))}
                     </div>
                 ) : (
-                    <div className="p-4 rounded-lg bg-neutral-50 border border-neutral-200">
+                    <div className="p-4 rounded-lg bg-gray-50 border border-gray-200">
                         {typeof widget.widget_content === 'string' ? (
-                            <p className="text-sm text-neutral-700">{widget.widget_content}</p>
+                            <p className="text-sm text-gray-700">{widget.widget_content}</p>
                         ) : (
                             <div className="space-y-2">
                                 {Object.entries(widget.widget_content).map(([key, value]) => (
                                     <div key={key} className="flex justify-between">
-                                        <span className="text-sm text-neutral-600 capitalize">
+                                        <span className="text-sm text-gray-600 capitalize">
                                             {key.replace(/_/g, ' ')}:
                                         </span>
-                                        <span className="text-sm font-medium text-neutral-900">
+                                        <span className="text-sm font-medium text-gray-900">
                                             {value}
                                         </span>
                                     </div>
@@ -162,12 +162,12 @@ export const Widget = memo<WidgetProps>(({ widget, onRemove, className = '' }) =
             </div>
 
             {/* Enhanced Widget Footer */}
-            <div className="mt-4 pt-4 border-t border-neutral-200">
+            <div className="mt-4 pt-4 border-t border-gray-200">
                 <div className="flex items-center justify-between text-xs">
-                    <span className="text-neutral-500">
+                    <span className="text-gray-500">
                         Created: {new Date(widget.creation_timestamp).toLocaleDateString()}
                     </span>
-                    <span className="status-indicator status-success">
+                    <span className="inline-flex items-center gap-1 px-2 py-1 text-xs font-semibold text-green-700 bg-green-100 border border-green-200 rounded-full">
                         Active
                     </span>
                 </div>

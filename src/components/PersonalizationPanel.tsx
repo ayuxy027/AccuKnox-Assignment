@@ -89,9 +89,9 @@ export const PersonalizationPanel: React.FC<PersonalizationPanelProps> = ({
                                     Widget Content (required)
                                 </label>
                                 <textarea
-                                    value={customWidgetData.widget_content}
+                                    value={typeof customWidgetData.widget_content === 'string' ? customWidgetData.widget_content : ''}
                                     onChange={(e) => setCustomWidgetData(prev => ({ ...prev, widget_content: e.target.value }))}
-                                    className="input min-h-[80px] resize-none"
+                                    className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-900 text-sm font-medium transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 min-h-[80px] resize-none"
                                     placeholder="Enter widget content (e.g., 'Metric 1: 100 Metric 2: 200')"
                                     required
                                 />

@@ -11,10 +11,7 @@
           "widget_content": {
             "connected_accounts": 2,
             "not_connected_accounts": 2,
-            "total_checks": 9659,
             "failed_checks": 1689,
-            "warning_checks": 681,
-            "not_available_checks": 36,
             "passed_checks": 7253
           },
           "is_removable": true,
@@ -60,7 +57,8 @@
           "widget_content": {
             "protected_workloads": 245,
             "unprotected_workloads": 23,
-            "coverage_percentage": 91.4
+            "coverage_percentage": 91.4,
+            "last_scan": "2 hours ago"
           },
           "is_removable": true,
           "is_searchable": true,
@@ -73,7 +71,8 @@
           "widget_content": {
             "active_threats": 7,
             "blocked_threats": 156,
-            "todays_alerts": 12
+            "todays_alerts": 12,
+            "threat_level": "Medium"
           },
           "is_removable": true,
           "is_searchable": true,
@@ -86,7 +85,8 @@
           "widget_content": {
             "vulnerable_images": 34,
             "scanned_images": 892,
-            "clean_images": 858
+            "clean_images": 858,
+            "scan_status": "Complete"
           },
           "is_removable": true,
           "is_searchable": true,
@@ -105,7 +105,8 @@
           "widget_content": {
             "protected_endpoints": 1567,
             "vulnerabilities": 89,
-            "last_scan": "2 hours ago"
+            "last_scan": "2 hours ago",
+            "protection_level": "High"
           },
           "is_removable": true,
           "is_searchable": true,
@@ -118,7 +119,8 @@
           "widget_content": {
             "new_iocs": 45,
             "blocked_malware": 12,
-            "suspicious_files": 8
+            "suspicious_files": 8,
+            "intel_score": "8.5/10"
           },
           "is_removable": true,
           "is_searchable": true,
@@ -131,7 +133,8 @@
           "widget_content": {
             "active_incidents": 3,
             "resolved_today": 15,
-            "avg_response_time": "2.3h"
+            "avg_response_time": "2.3h",
+            "sla_compliance": "95%"
           },
           "is_removable": true,
           "is_searchable": true,

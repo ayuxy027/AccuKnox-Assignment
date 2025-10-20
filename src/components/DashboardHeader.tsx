@@ -43,7 +43,7 @@ export const DashboardHeader = memo<DashboardHeaderProps>(({ className = '' }) =
                     {/* Enhanced Logo/Title */}
                     <div className="flex items-center gap-3">
                         {brandLogo}
-                        <h1 className="text-xl font-semibold text-gray-900 bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
+                        <h1 className="text-xl font-semibold text-gray-900">
                             Widgetly
                         </h1>
                     </div>
@@ -53,7 +53,7 @@ export const DashboardHeader = memo<DashboardHeaderProps>(({ className = '' }) =
                         <SearchInput
                             value={searchQuery}
                             onChange={handleSearchChange}
-                            placeholder="Q Search anything..."
+                            placeholder="Search anything..."
                             debounceMs={200}
                         />
                     </div>
@@ -88,7 +88,7 @@ export const DashboardHeader = memo<DashboardHeaderProps>(({ className = '' }) =
                     <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3">
                             {brandLogo}
-                            <h1 className="text-lg font-semibold text-gray-900 bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
+                            <h1 className="text-lg font-semibold text-gray-900">
                                 Widgetly
                             </h1>
                         </div>

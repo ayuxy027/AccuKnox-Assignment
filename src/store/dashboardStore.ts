@@ -5,7 +5,7 @@ import type { DashboardState, DashboardActions, Widget, NewWidgetData } from '..
 import dashboardConfig from '../data/dashboardConfig.json';
 import { storage } from '../utils/storage';
 
-const defaultCategories = dashboardConfig.dashboard_configuration;
+const defaultCategories = dashboardConfig.dashboard_configuration as any;
 
 interface DashboardStore extends DashboardState, DashboardActions {}
 
