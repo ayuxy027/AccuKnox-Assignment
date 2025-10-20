@@ -110,6 +110,3 @@ src/
 - **Performance Monitoring**: Real-time metrics
 - **Responsive Design**: Mobile-first approach
 - **SEO Optimized**: Semantic markup structure
-
-## Interview Questions
-See `interview.md` for comprehensive technical questions covering JSON schema design, state management, UI/UX implementation, and frontend best practices.
