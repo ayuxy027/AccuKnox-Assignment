@@ -37,7 +37,7 @@ export const DashboardHeader = memo<DashboardHeaderProps>(({ className = '' }) =
 
     return (
         <header className={`border-b border-neutral-200 sticky top-0 z-50 backdrop-blur-sm bg-white/95 ${className}`}>
-            <div className="container py-4">
+            <div className="container py-4 pb-6">
                 {/* Desktop Layout */}
                 <div className="hidden md:flex items-center justify-between gap-4">
                     {/* Enhanced Logo/Title */}

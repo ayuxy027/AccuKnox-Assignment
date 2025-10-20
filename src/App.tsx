@@ -42,7 +42,7 @@ function App() {
     <div className="min-h-screen bg-neutral-50">
       <DashboardHeader />
 
-      <main className="container py-8">
+      <main className="container py-8 mt-4">
         {/* Enhanced Analytics Overview Section */}
         <section className="mb-12" aria-labelledby="analytics-heading">
           <div className="mb-6">
