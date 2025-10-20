@@ -1,0 +1,110 @@
+{
+  "dashboard_configuration": [
+    {
+      "category_id": "cspmExecutiveDashboard",
+      "category_name": "CSPM Executive Dashboard",
+      "widgets": [
+        {
+          "widget_id": "cloudAccountRiskAssessment",
+          "widget_name": "Cloud Account Risk Assessment",
+          "widget_content": "Connected (2) Not Connected (2) 9659 Total Failed (1689) Warning (681) Not available (36) Passed (7253)",
+          "is_removable": true,
+          "is_searchable": true,
+          "creation_timestamp": "2025-01-20T09:47:00Z"
+        },
+        {
+          "widget_id": "top5NamespaceAlerts",
+          "widget_name": "Top 5 Namespace Specific Alerts",
+          "widget_content": "No Graph data available!",
+          "is_removable": true,
+          "is_searchable": true,
+          "creation_timestamp": "2025-01-20T09:47:00Z"
+        },
+        {
+          "widget_id": "complianceOverview",
+          "widget_name": "Compliance Overview",
+          "widget_content": "PCI DSS: 85% AWS CIS: 92% SOC 2: 78% GDPR: 88%",
+          "is_removable": true,
+          "is_searchable": true,
+          "creation_timestamp": "2025-01-20T09:47:00Z"
+        },
+        {
+          "widget_id": "securityTrends",
+          "widget_name": "Security Trends",
+          "widget_content": "Last 30 days: Critical (12) High (45) Medium (89) Low (156)",
+          "is_removable": true,
+          "is_searchable": true,
+          "creation_timestamp": "2025-01-20T09:47:00Z"
+        }
+      ]
+    },
+    {
+      "category_id": "cnappDashboard",
+      "category_name": "CNAPP Dashboard",
+      "widgets": [
+        {
+          "widget_id": "workloadProtection",
+          "widget_name": "Workload Protection Status",
+          "widget_content": "Protected Workloads: 245 Unprotected: 23 Coverage: 91.4%",
+          "is_removable": true,
+          "is_searchable": true,
+          "creation_timestamp": "2025-01-20T09:47:00Z"
+        },
+        {
+          "widget_id": "runtimeThreats",
+          "widget_name": "Runtime Threat Detection",
+          "widget_content": "Active Threats: 7 Blocked: 156 Today's Alerts: 12",
+          "is_removable": true,
+          "is_searchable": true,
+          "creation_timestamp": "2025-01-20T09:47:00Z"
+        },
+        {
+          "widget_id": "containerSecurity",
+          "widget_name": "Container Security Posture",
+          "widget_content": "Vulnerable Images: 34 Scanned: 892 Clean: 858",
+          "is_removable": true,
+          "is_searchable": true,
+          "creation_timestamp": "2025-01-20T09:47:00Z"
+        },
+        {
+          "widget_id": "networkSecurity",
+          "widget_name": "Network Security Analysis",
+          "widget_content": "Allowed Connections: 1,234 Blocked: 567 Suspicious: 23",
+          "is_removable": true,
+          "is_searchable": true,
+          "creation_timestamp": "2025-01-20T09:47:00Z"
+        }
+      ]
+    },
+    {
+      "category_id": "cwppDashboard",
+      "category_name": "CWPP Dashboard",
+      "widgets": [
+        {
+          "widget_id": "endpointProtection",
+          "widget_name": "Endpoint Protection Status",
+          "widget_content": "Protected Endpoints: 1,567 Vulnerabilities: 89 Last Scan: 2 hours ago",
+          "is_removable": true,
+          "is_searchable": true,
+          "creation_timestamp": "2025-01-20T09:47:00Z"
+        },
+        {
+          "widget_id": "threatIntelligence",
+          "widget_name": "Threat Intelligence Feed",
+          "widget_content": "New IOCs: 45 Blocked Malware: 12 Suspicious Files: 8",
+          "is_removable": true,
+          "is_searchable": true,
+          "creation_timestamp": "2025-01-20T09:47:00Z"
+        },
+        {
+          "widget_id": "incidentResponse",
+          "widget_name": "Incident Response Metrics",
+          "widget_content": "Active Incidents: 3 Resolved Today: 15 Avg Response Time: 2.3h",
+          "is_removable": true,
+          "is_searchable": true,
+          "creation_timestamp": "2025-01-20T09:47:00Z"
+        }
+      ]
+    }
+  ]
+}
