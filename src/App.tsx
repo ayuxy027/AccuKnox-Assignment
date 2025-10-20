@@ -3,7 +3,7 @@ import { DashboardHeader } from './components/DashboardHeader';
 import { CategorySection } from './components/CategorySection';
 import { PersonalizationPanel } from './components/PersonalizationPanel';
 import { ChartWidget } from './components/ChartWidget';
-import './styles/globals.css';
+import { TestTailwind } from './TestTailwind';
 
 // Sample chart data for visual elements
 const sampleChartData = [
@@ -41,6 +41,9 @@ function App() {
 
   return (
     <div className="min-h-screen bg-slate-50">
+      <div className="p-4">
+        <TestTailwind />
+      </div>
       <DashboardHeader />
 
       <main className="container py-8">
