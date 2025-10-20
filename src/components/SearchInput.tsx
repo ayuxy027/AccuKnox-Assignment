@@ -51,7 +51,7 @@ export const SearchInput = memo<SearchInputProps>(({
     return (
         <div className={`relative ${className}`}>
             <Search
-                className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-neutral-400 pointer-events-none"
+                className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none"
                 aria-hidden="true"
             />
             <input
@@ -61,7 +61,7 @@ export const SearchInput = memo<SearchInputProps>(({
                 value={localValue}
                 onChange={handleInputChange}
                 onKeyDown={handleKeyDown}
-                className="input pl-10 pr-10"
+                className="w-full px-4 py-3 pl-10 pr-10 border border-gray-300 rounded-lg bg-white text-gray-900 text-sm font-medium transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 aria-label="Search input"
                 autoComplete="off"
                 spellCheck="false"
@@ -69,7 +69,7 @@ export const SearchInput = memo<SearchInputProps>(({
             {localValue && (
                 <button
                     onClick={handleClear}
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2 p-1 rounded-full hover:bg-neutral-100 text-neutral-400 hover:text-neutral-600 transition-colors"
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 p-1 rounded-full hover:bg-gray-100 text-gray-400 hover:text-gray-600 transition-colors duration-150"
                     aria-label="Clear search"
                     type="button"
                 >

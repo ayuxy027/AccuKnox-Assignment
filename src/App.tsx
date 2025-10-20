@@ -39,18 +39,18 @@ function App() {
   } = useDashboardStore();
 
   return (
-    <div className="min-h-screen bg-neutral-50">
+    <div className="min-h-screen bg-gray-50">
       <DashboardHeader />
 
-      <main className="container py-8 mt-4">
+      <main className="max-w-7xl mx-auto px-6 py-8 mt-4">
         {/* Enhanced Analytics Overview Section */}
         <section className="mb-12" aria-labelledby="analytics-heading">
           <div className="mb-6">
-            <h2 id="analytics-heading" className="text-2xl font-bold text-neutral-900">
+            <h2 id="analytics-heading" className="text-2xl font-bold text-gray-900">
               Analytics Overview
             </h2>
           </div>
-          <div className="grid-auto-fit">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <ChartWidget
               title="Security Trends"
               data={sampleChartData}
@@ -74,26 +74,26 @@ function App() {
         {/* Enhanced Dashboard Categories */}
         <section aria-labelledby="categories-heading">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
-            <h2 id="categories-heading" className="text-2xl font-bold text-neutral-900">
+            <h2 id="categories-heading" className="text-2xl font-bold text-gray-900">
               Dashboard Categories
             </h2>
-            <div className="text-sm text-neutral-600 font-medium">
+            <div className="text-sm text-gray-600 font-medium">
               {filteredCategories.reduce((total, cat) => total + cat.widgets.length, 0)} total widgets
             </div>
           </div>
 
           {filteredCategories.length === 0 ? (
             <div className="text-center py-16">
-              <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-br from-neutral-100 to-neutral-200 flex items-center justify-center shadow-sm">
+              <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center shadow-sm">
                 <span className="text-4xl" role="img" aria-label="Search icon">🔍</span>
               </div>
-              <h3 className="text-lg font-medium text-neutral-900 mb-2">No widgets found</h3>
-              <p className="text-neutral-600 mb-6 max-w-md mx-auto">
+              <h3 className="text-lg font-medium text-gray-900 mb-2">No widgets found</h3>
+              <p className="text-gray-600 mb-6 max-w-md mx-auto">
                 Try adjusting your search query or add new widgets to your dashboard.
               </p>
               <button
                 onClick={togglePersonalizationPanel}
-                className="btn btn-primary"
+                className="inline-flex items-center justify-center gap-2 px-4 py-2 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-lg shadow-sm hover:shadow-md transition-all duration-150"
                 aria-label="Add new widgets to dashboard"
               >
                 Add Widget

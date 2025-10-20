@@ -38,34 +38,34 @@ export const StorageIndicator = memo<StorageIndicatorProps>(({ className = '' })
         <div className={`relative ${className}`}>
             <button
                 onClick={() => setIsExpanded(!isExpanded)}
-                className="flex items-center gap-2 px-3 py-2 text-sm bg-neutral-100 hover:bg-neutral-200 rounded-lg transition-colors"
+                className="flex items-center gap-2 px-3 py-2 text-sm bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors duration-150"
                 aria-label="Toggle storage information"
             >
-                <Database className="w-4 h-4 text-neutral-600" />
-                <span className="text-neutral-700 font-medium">
+                <Database className="w-4 h-4 text-gray-600" />
+                <span className="text-gray-700 font-medium">
                     {formatBytes(usage.used)}
                 </span>
                 {isExpanded ? (
-                    <ChevronUp className="w-4 h-4 text-neutral-600" />
+                    <ChevronUp className="w-4 h-4 text-gray-600" />
                 ) : (
-                    <ChevronDown className="w-4 h-4 text-neutral-600" />
+                    <ChevronDown className="w-4 h-4 text-gray-600" />
                 )}
             </button>
 
             {isExpanded && (
-                <div className="absolute top-full right-0 mt-2 w-64 bg-white border border-neutral-200 rounded-lg shadow-lg p-4 z-50">
+                <div className="absolute top-full right-0 mt-2 w-64 bg-white border border-gray-200 rounded-lg shadow-lg p-4 z-50">
                     <div className="space-y-3">
                         <div className="flex items-center justify-between">
-                            <span className="text-sm font-medium text-neutral-900">Local Storage</span>
-                            <span className="text-xs text-neutral-500">
+                            <span className="text-sm font-medium text-gray-900">Local Storage</span>
+                            <span className="text-xs text-gray-500">
                                 {percentage.toFixed(1)}% used
                             </span>
                         </div>
 
-                        <div className="w-full bg-neutral-200 rounded-full h-2">
+                        <div className="w-full bg-gray-200 rounded-full h-2">
                             <div
                                 className={`h-2 rounded-full transition-all duration-300 ${percentage > 80 ? 'bg-red-500' :
-                                        percentage > 60 ? 'bg-yellow-500' : 'bg-green-500'
+                                    percentage > 60 ? 'bg-yellow-500' : 'bg-green-500'
                                     }`}
                                 style={{ width: `${Math.min(percentage, 100)}%` }}
                             />
@@ -73,11 +73,11 @@ export const StorageIndicator = memo<StorageIndicatorProps>(({ className = '' })
 
                         <div className="grid grid-cols-2 gap-4 text-xs">
                             <div>
-                                <span className="text-neutral-600">Used:</span>
+                                <span className="text-gray-600">Used:</span>
                                 <span className="ml-1 font-medium">{formatBytes(usage.used)}</span>
                             </div>
                             <div>
-                                <span className="text-neutral-600">Available:</span>
+                                <span className="text-gray-600">Available:</span>
                                 <span className="ml-1 font-medium">{formatBytes(usage.available)}</span>
                             </div>
                         </div>
