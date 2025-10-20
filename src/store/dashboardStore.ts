@@ -103,6 +103,7 @@ export const useDashboardStore = create<DashboardStore>()(
       const newWidget: Widget = {
         widget_id: uuidv4(),
         widget_name: data.widget_name,
+        widget_type: data.widget_type,
         widget_content: data.widget_content,
         is_removable: true,
         is_searchable: true,

@@ -1,7 +1,8 @@
 export interface Widget {
   widget_id: string;
   widget_name: string;
-  widget_content: string;
+  widget_type?: 'metrics' | 'chart' | 'compliance' | 'custom';
+  widget_content: string | { [key: string]: string | number | boolean };
   is_removable: boolean;
   is_searchable: boolean;
   creation_timestamp: string;
@@ -19,7 +20,8 @@ export interface DashboardConfiguration {
 
 export interface NewWidgetData {
   widget_name: string;
-  widget_content: string;
+  widget_type?: 'metrics' | 'chart' | 'compliance' | 'custom';
+  widget_content: string | { [key: string]: string | number | boolean };
   category_id: string;
 }
 

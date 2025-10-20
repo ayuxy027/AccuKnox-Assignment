@@ -25,36 +25,60 @@ const getWidgetIcon = (widgetName: string) => {
     return <Activity className="w-5 h-5" aria-hidden="true" />;
 };
 
-const parseWidgetContent = (content: string) => {
-    // Enhanced parsing for better metric extraction
+const formatWidgetContent = (content: string | { [key: string]: string | number | boolean }, widgetType?: string) => {
+    if (typeof content === 'string') {
+        // Handle old string format
+        if (content.includes('No Graph data available!') || content.includes('No data')) {
+            return { hasData: false, metrics: [], labels: [] };
+        }
+
+        // Parse string content for metrics
+        const metrics: string[] = [];
+        const labels: string[] = [];
+        const numberMatches = content.match(/\b(\d{1,3}(?:,\d{3})*|\d+)\b/g);
+        const textParts = content.split(/\b\d{1,3}(?:,\d{3})*\b/);
+
+        if (numberMatches && textParts.length > 1) {
+            numberMatches.forEach((metric, index) => {
+                metrics.push(metric);
+                const context = textParts[index]?.trim().replace(/[^\w\s]/g, '').trim();
+                labels.push(context || `Metric ${index + 1}`);
+            });
+        }
+
+        return { hasData: metrics.length > 0, metrics, labels };
+    }
+
+    // Handle new object format
+    if (widgetType === 'chart' && content.has_data === false) {
+        return { hasData: false, metrics: [], labels: [] };
+    }
+
     const metrics: string[] = [];
     const labels: string[] = [];
 
-    // Extract numbers and their context
-    const numberMatches = content.match(/\b(\d{1,3}(?:,\d{3})*|\d+)\b/g);
-    const textParts = content.split(/\b\d{1,3}(?:,\d{3})*\b/);
+    Object.entries(content).forEach(([key, value]) => {
+        if (typeof value === 'number') {
+            metrics.push(value.toString());
+            labels.push(key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase()));
+        } else if (typeof value === 'string' && /^\d+/.test(value)) {
+            metrics.push(value);
+            labels.push(key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase()));
+        }
+    });
 
-    if (numberMatches && textParts.length > 1) {
-        numberMatches.forEach((metric, index) => {
-            metrics.push(metric);
-            const context = textParts[index]?.trim().replace(/[^\w\s]/g, '').trim();
-            labels.push(context || `Metric ${index + 1}`);
-        });
-    }
-
-    return { metrics, labels };
+    return { hasData: true, metrics, labels };
 };
 
 export const Widget = memo<WidgetProps>(({ widget, onRemove, className = '' }) => {
-    const { metrics, labels } = useMemo(() => parseWidgetContent(widget.widget_content), [widget.widget_content]);
+    const { hasData, metrics, labels } = useMemo(() => formatWidgetContent(widget.widget_content, widget.widget_type), [widget.widget_content, widget.widget_type]);
     const icon = useMemo(() => getWidgetIcon(widget.widget_name), [widget.widget_name]);
 
     const handleRemove = useCallback(() => {
         onRemove(widget.widget_id);
     }, [onRemove, widget.widget_id]);
 
-    const isDataAvailable = !widget.widget_content.includes('No Graph data available!') &&
-        !widget.widget_content.includes('No data');
+    const isDataAvailable = hasData;
 
     const widgetId = `widget-${widget.widget_id}`;
 
@@ -117,7 +141,22 @@ export const Widget = memo<WidgetProps>(({ widget, onRemove, className = '' }) =
                     </div>
                 ) : (
                     <div className="p-4 rounded-lg bg-neutral-50 border border-neutral-200">
-                        <p className="text-sm text-neutral-700">{widget.widget_content}</p>
+                        {typeof widget.widget_content === 'string' ? (
+                            <p className="text-sm text-neutral-700">{widget.widget_content}</p>
+                        ) : (
+                            <div className="space-y-2">
+                                {Object.entries(widget.widget_content).map(([key, value]) => (
+                                    <div key={key} className="flex justify-between">
+                                        <span className="text-sm text-neutral-600 capitalize">
+                                            {key.replace(/_/g, ' ')}:
+                                        </span>
+                                        <span className="text-sm font-medium text-neutral-900">
+                                            {value}
+                                        </span>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
                     </div>
                 )}
             </div>

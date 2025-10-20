@@ -16,6 +16,7 @@ export const PersonalizationPanel: React.FC<PersonalizationPanelProps> = ({
     const [showCustomWidgetForm, setShowCustomWidgetForm] = useState(false);
     const [customWidgetData, setCustomWidgetData] = useState<NewWidgetData>({
         widget_name: '',
+        widget_type: 'custom',
         widget_content: '',
         category_id: '',
     });
@@ -26,6 +27,7 @@ export const PersonalizationPanel: React.FC<PersonalizationPanelProps> = ({
             addCustomWidget(customWidgetData);
             setCustomWidgetData({
                 widget_name: '',
+                widget_type: 'custom',
                 widget_content: '',
                 category_id: '',
             });
