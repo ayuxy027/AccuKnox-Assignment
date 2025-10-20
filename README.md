@@ -1,1 +1,0 @@
-AI SDK Templates for text,image and RSC generation because I like to suffer
