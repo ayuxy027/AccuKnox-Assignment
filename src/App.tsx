@@ -2,33 +2,6 @@ import { useDashboardStore } from './store/dashboardStore';
 import { DashboardHeader } from './components/DashboardHeader';
 import { CategorySection } from './components/CategorySection';
 import { PersonalizationPanel } from './components/PersonalizationPanel';
-import { ChartWidget } from './components/ChartWidget';
-
-// Sample chart data for visual elements
-const sampleChartData = [
-  { name: 'Jan', value: 400 },
-  { name: 'Feb', value: 300 },
-  { name: 'Mar', value: 200 },
-  { name: 'Apr', value: 278 },
-  { name: 'May', value: 189 },
-  { name: 'Jun', value: 239 },
-];
-
-const pieChartData = [
-  { name: 'Critical', value: 12, color: '#ef4444' },
-  { name: 'High', value: 45, color: '#f59e0b' },
-  { name: 'Medium', value: 89, color: '#3b82f6' },
-  { name: 'Low', value: 156, color: '#10b981' },
-];
-
-const lineChartData = [
-  { name: 'Week 1', value: 2400 },
-  { name: 'Week 2', value: 1398 },
-  { name: 'Week 3', value: 9800 },
-  { name: 'Week 4', value: 3908 },
-  { name: 'Week 5', value: 4800 },
-  { name: 'Week 6', value: 3800 },
-];
 
 function App() {
   const {
@@ -42,46 +15,9 @@ function App() {
     <div className="min-h-screen bg-gray-50">
       <DashboardHeader />
 
-      <main className="max-w-7xl mx-auto px-6 py-8 mt-8">
-        {/* Enhanced Analytics Overview Section */}
-        <section className="mb-12" aria-labelledby="analytics-heading">
-          <div className="mb-6">
-            <h2 id="analytics-heading" className="text-2xl font-bold text-gray-900">
-              Analytics Overview
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <ChartWidget
-              title="Security Trends"
-              data={sampleChartData}
-              type="bar"
-              color="#3b82f6"
-            />
-            <ChartWidget
-              title="Risk Distribution"
-              data={pieChartData}
-              type="pie"
-            />
-            <ChartWidget
-              title="Performance Metrics"
-              data={lineChartData}
-              type="line"
-              color="#10b981"
-            />
-          </div>
-        </section>
-
+      <main className="max-w-7xl mx-auto px-6 py-8">
         {/* Enhanced Dashboard Categories */}
         <section aria-labelledby="categories-heading">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
-            <h2 id="categories-heading" className="text-2xl font-bold text-gray-900">
-              Dashboard Categories
-            </h2>
-            <div className="text-sm text-gray-600 font-medium">
-              {filteredCategories.reduce((total, cat) => total + cat.widgets.length, 0)} total widgets
-            </div>
-          </div>
-
           {filteredCategories.length === 0 ? (
             <div className="text-center py-16">
               <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center shadow-sm">
@@ -106,6 +42,7 @@ function App() {
                   key={category.category_id}
                   category={category}
                   onRemoveWidget={removeWidget}
+                  onAddWidget={togglePersonalizationPanel}
                 />
               ))}
             </div>

@@ -1,17 +1,19 @@
 import { memo, useCallback, useState } from 'react';
-import { ChevronDown, ChevronRight } from 'lucide-react';
+import { ChevronDown, ChevronRight, Plus } from 'lucide-react';
 import type { Category } from '../types/dashboard';
 import { Widget } from './Widget';
 
 interface CategorySectionProps {
     category: Category;
     onRemoveWidget: (widgetId: string) => void;
+    onAddWidget?: (categoryId: string) => void;
     className?: string;
 }
 
 export const CategorySection = memo<CategorySectionProps>(({
     category,
     onRemoveWidget,
+    onAddWidget,
     className = ''
 }) => {
     const [isExpanded, setIsExpanded] = useState(true);
@@ -23,6 +25,12 @@ export const CategorySection = memo<CategorySectionProps>(({
     const handleRemoveWidget = useCallback((widgetId: string) => {
         onRemoveWidget(widgetId);
     }, [onRemoveWidget]);
+
+    const handleAddWidget = useCallback(() => {
+        if (onAddWidget) {
+            onAddWidget(category.category_id);
+        }
+    }, [onAddWidget, category.category_id]);
 
     return (
         <section className={`mb-8 ${className}`}>
@@ -59,27 +67,24 @@ export const CategorySection = memo<CategorySectionProps>(({
             {/* Enhanced Category Content */}
             {isExpanded && (
                 <div className="border-l border-r border-b border-neutral-200 rounded-b-lg bg-white shadow-sm">
-                    {category.widgets.length === 0 ? (
-                        <div className="p-8 text-center text-neutral-500">
-                            <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-neutral-100 to-neutral-200 flex items-center justify-center shadow-sm">
-                                <span className="text-2xl" role="img" aria-label="Chart icon">📊</span>
-                            </div>
-                            <p className="text-sm font-medium">No widgets in this category</p>
-                            <p className="text-xs text-neutral-400 mt-1">
-                                Click "Add Widget" to get started
-                            </p>
-                        </div>
-                    ) : (
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 p-4 sm:p-6">
-                            {category.widgets.map((widget) => (
-                                <Widget
-                                    key={widget.widget_id}
-                                    widget={widget}
-                                    onRemove={handleRemoveWidget}
-                                />
-                            ))}
-                        </div>
-                    )}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 p-4 sm:p-6">
+                        {category.widgets.map((widget) => (
+                            <Widget
+                                key={widget.widget_id}
+                                widget={widget}
+                                onRemove={handleRemoveWidget}
+                            />
+                        ))}
+
+                        {/* Add Widget Button */}
+                        <button
+                            onClick={handleAddWidget}
+                            className="flex flex-col items-center justify-center p-8 border-2 border-dashed border-gray-300 rounded-xl hover:border-blue-500 hover:bg-blue-50 transition-all duration-200 text-gray-500 hover:text-blue-600"
+                        >
+                            <Plus className="w-8 h-8 mb-2" />
+                            <span className="text-sm font-medium">Add Widget</span>
+                        </button>
+                    </div>
                 </div>
             )}
         </section>
